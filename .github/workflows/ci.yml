@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test & Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: crates/literouter-decision
+
+      - name: Rust Formatting Check
+        run: cargo fmt --manifest-path crates/literouter-decision/Cargo.toml --check
+
+      - name: Rust Clippy
+        run: cargo clippy --manifest-path crates/literouter-decision/Cargo.toml --all-targets -- -D warnings
+
+      - name: Rust Unit Tests
+        run: cargo test --manifest-path crates/literouter-decision/Cargo.toml
+
+      - name: Go Race & Integration Tests
+        run: go test -v -count=1 -race ./...
+
+      - name: Build Binary
+        run: make build

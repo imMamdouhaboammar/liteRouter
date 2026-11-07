@@ -1,0 +1,26 @@
+# Binaries and build artifacts
+bin/
+target/
+crates/literouter-decision/target/
+
+# Operating system and editor files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Test and profiling artifacts
+*.out
+*.test
+*.prof
+cpu.pprof
+mem.pprof
+
+# Local session learnings
+docs/session-learnings/

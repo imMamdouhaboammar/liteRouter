@@ -1,0 +1,37 @@
+name: Feature Request
+description: Propose a new routing strategy, provider adapter, or telemetry integration.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Use Case
+      description: What routing limitation or operational challenge are you addressing?
+      placeholder: Clear explanation of the motivation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: How should liteRouter solve this? (e.g., changes to KvStore, Decision Engine, Spark, Gateway).
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other approaches or workarounds did you consider?
+
+  - type: checkboxes
+    id: invariants
+    attributes:
+      label: Invariant Compatibility
+      description: Does this proposal maintain existing invariants?
+      options:
+        - label: Preserves sub-millisecond Pareto SPF routing performance
+          required: true
+        - label: Preserves transparent failover and circuit breaker isolation
+          required: true
