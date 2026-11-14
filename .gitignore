@@ -1,7 +1,20 @@
 # Binaries and build artifacts
 bin/
+dist/
 target/
 crates/literouter-decision/target/
+*.dSYM/
+
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.cert
+*.pfx
+*.p12
 
 # Operating system and editor files
 .DS_Store
@@ -9,18 +22,32 @@ crates/literouter-decision/target/
 ._*
 .Spotlight-V100
 .Trashes
+Thumbs.db
+ehthumbs.db
 *.swp
 *.swo
 *~
 .idea/
 .vscode/
 
-# Test and profiling artifacts
+# Test, coverage, and profiling artifacts
 *.out
 *.test
 *.prof
 cpu.pprof
 mem.pprof
+coverage/
+.cache/
+
+# Node/Web artifacts (if web/docs tooling added)
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Local session learnings
 docs/session-learnings/
